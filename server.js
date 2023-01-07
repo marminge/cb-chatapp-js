@@ -17,7 +17,7 @@ const { PORT, CLIENT } = CONSTANTS;
 
 // Create the HTTP server
 const server = http.createServer((req, res) => {
-  // get the file path from req.url, or '/public/index.html' if req.url is '/'
+ // get the file path from req.url, or '/public/index.html' if req.url is '/'
   const filePath = ( req.url === '/' ) ? '/public/index.html' : req.url;
 
   // determine the contentType by the file extension
@@ -37,10 +37,13 @@ const server = http.createServer((req, res) => {
 
 // TODO
 // Exercise 3: Create the WebSocket Server using the HTTP server
-
+const wsServer = new WebSocket.Server({server: server});
 
 // TODO
-// Exercise 5: Respond to connection events 
+// Exercise 5: Respond to connection events
+wsServer.on('connection', () => {
+  console.log('new connection!')
+})
   // Exercise 6: Respond to client messages
   // Exercise 7: Send a message back to the client, echoing the message received
   // Exercise 8: Broadcast messages received to all other clients
